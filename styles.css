@@ -1,3 +1,8 @@
+:root {
+  --primary-color: rgb(255, 0, 0);
+  --secondary-color: rgb(255, 247, 0);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,20 +10,25 @@
 }
 
 body {
-  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  background-color: black;
+  height: 100vh;
 }
 
 .grid-container {
-  width: 40rem;
-  height: 40rem;
+  width: 30rem;
+  height: 30rem;
   border: 2px solid red;
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .grid-item {
@@ -31,5 +41,56 @@ body {
   width: 40rem;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
+  padding: 1rem;
+}
+
+.etch {
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  width: 36rem;
+  height: 36rem;
+  border-radius: 0.5rem;
+  height: auto;
+}
+
+.etch h1 {
+  color: var(--secondary-color);
+  padding: 1rem;
+}
+
+.func-btn {
+  padding: 0.2rem;
+  border-radius: 0.9rem;
+  border: 0.2rem solid var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: red;
+  font-weight: 900;
+}
+
+button.func-btn,
+.color-picker.func-btn {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.func-btn:hover,
+.color-picker.func-btn:hover {
+  background-color: black;
+  color: var(--secondary-color);
+}
+
+button.func-btn:active,
+.color-picker.func-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
