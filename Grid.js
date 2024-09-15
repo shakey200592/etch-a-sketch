@@ -1,9 +1,48 @@
 const Grid = {
   gridContainer: document.querySelector(".grid-container"),
   GenerateGridBtn: document.querySelector(".generate-grid-btn"),
+  colorPicker: document.querySelector(".color-picker"),
+  rainbowBtn: document.querySelector(".rainbow-mode-btn"),
   defaultGridSize: 16,
   minimumGridSize: 1,
   maximumGridSize: 100,
+
+  // helper functions to randomly generate values for rgb selection
+  randomRgbNumber() {
+    return (Math.floor(Math.random() * 256) + 1).toString(16).padStart(2, "0");
+  },
+
+  getRandomRGB() {
+    return `#${this.randomRgbNumber()}${this.randomRgbNumber()}${this.randomRgbNumber()}`;
+  },
+
+  gridDraw() {
+    let drawing = false;
+    let rainbowMode = false;
+    let color = "#000000";
+
+    this.rainbowBtn.addEventListener("click", () => {
+      rainbowMode = true;
+    });
+
+    this.colorPicker.addEventListener("change", (event) => {
+      color = event.target.value;
+      rainbowMode = false;
+    });
+
+    this.gridContainer.addEventListener("pointerdown", (event) => {
+      drawing = true;
+      event.target.style.backgroundColor = `${color}`;
+    });
+    this.gridContainer.addEventListener("pointerup", () => (drawing = false));
+    this.gridContainer.addEventListener("mouseover", (event) => {
+      if (drawing && event.target.classList.contains("grid-item")) {
+        event.target.style.backgroundColor = rainbowMode
+          ? this.getRandomRGB()
+          : `${color}`;
+      }
+    });
+  },
 
   createGrid(gridSize = this.defaultGridSize) {
     this.gridContainer.innerHTML = ""; // Clear any previously created grids
@@ -18,6 +57,7 @@ const Grid = {
       // Append a new grid item to the parent container
       this.gridContainer.appendChild(createGridItem);
     }
+    this.gridDraw();
   },
 
   validUserInput(input) {
@@ -37,27 +77,7 @@ const Grid = {
       let userInput = prompt(
         "Please enter a new size for the Etch-A-Sketch. Valid range is 1 - 100"
       );
-      while (this.validUserInput(userInput) === false) {
-        userInput = prompt(
-          "Invalid Input Please enter a valid size between 1 - 100"
-        );
-      }
-      console.log(userInput);
-    });
-  },
-
-  gridDraw() {
-    let drawing = false;
-    const gridItems = document.querySelectorAll(".grid-item");
-    this.gridContainer.addEventListener("mousedown", (event) => {
-      drawing = true;
-      event.target.style.backgroundColor = "blue";
-    });
-    this.gridContainer.addEventListener("mouseup", () => (drawing = false));
-    this.gridContainer.addEventListener("mouseover", (event) => {
-      if (drawing && event.target.classList.contains("grid-item")) {
-        event.target.style.backgroundColor = "blue";
-      }
+      this.createGrid(userInput);
     });
   },
 };
