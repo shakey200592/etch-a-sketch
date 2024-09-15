@@ -11,3 +11,5 @@ Etch-A-Sketch is a digital drawing application inspired by the classic toy. It a
 - **Color Picker**: Choose colors using an HTML color picker.
 - **Rainbow Mode**: Enable rainbow mode to use random colors for drawing.
 - **Eraser Mode**: Clear drawings using the eraser mode.
+
+You can see the Webapp in action [HERE](https://shakey200592.github.io/etch-a-sketch/)
