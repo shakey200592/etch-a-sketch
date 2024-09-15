@@ -21,6 +21,8 @@ const Grid = {
     let rainbowMode = false;
     let color = "#000000";
 
+    // Toggle rainbow mode
+
     this.rainbowBtn.addEventListener("click", () => {
       rainbowMode = true;
     });
@@ -32,14 +34,20 @@ const Grid = {
 
     this.gridContainer.addEventListener("pointerdown", (event) => {
       drawing = true;
+      let opacity = parseFloat(event.target.style.opacity) || 0.1;
+      opacity += 0.1;
       event.target.style.backgroundColor = `${color}`;
+      event.target.style.opacity = opacity.toString();
     });
     this.gridContainer.addEventListener("pointerup", () => (drawing = false));
     this.gridContainer.addEventListener("mouseover", (event) => {
       if (drawing && event.target.classList.contains("grid-item")) {
+        let opacity = parseFloat(event.target.style.opacity) || 0.1;
+        opacity += 0.1;
         event.target.style.backgroundColor = rainbowMode
           ? this.getRandomRGB()
           : `${color}`;
+        event.target.style.opacity = opacity.toString();
       }
     });
   },
