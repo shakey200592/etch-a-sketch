@@ -32,7 +32,7 @@ const Grid = {
   },
 
   // Allow the user to create a grid of a specified size between 1 - 100.
-  CreatenewGridFromPrompt() {
+  CreateNewGridFromPrompt() {
     this.GenerateGridBtn.addEventListener("click", () => {
       let userInput = prompt(
         "Please enter a new size for the Etch-A-Sketch. Valid range is 1 - 100"
@@ -43,6 +43,21 @@ const Grid = {
         );
       }
       console.log(userInput);
+    });
+  },
+
+  gridDraw() {
+    let drawing = false;
+    const gridItems = document.querySelectorAll(".grid-item");
+    this.gridContainer.addEventListener("mousedown", (event) => {
+      drawing = true;
+      event.target.style.backgroundColor = "blue";
+    });
+    this.gridContainer.addEventListener("mouseup", () => (drawing = false));
+    this.gridContainer.addEventListener("mouseover", (event) => {
+      if (drawing && event.target.classList.contains("grid-item")) {
+        event.target.style.backgroundColor = "blue";
+      }
     });
   },
 };
